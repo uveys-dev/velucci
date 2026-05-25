@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VELUCCI — Haute Horlogerie</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;200;300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #e2c97e;
+    --gold-pale: #f5e9c8;
+    --black: #080808;
+    --charcoal: #111111;
+    --smoke: #1a1a1a;
+    --cream: #f5f0e8;
+    --silver: #9a9a9a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 200;
+    letter-spacing: 0.12em;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.4s ease, opacity 0.3s;
+    mix-blend-mode: difference;
+    opacity: 0.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 32px 60px;
+    background: linear-gradient(to bottom, rgba(8,8,8,0.95), transparent);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    letter-spacing: 0.4em;
+    color: var(--gold-light);
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex; gap: 48px; list-style: none;
+  }
+  .nav-links a {
+    color: var(--silver);
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+
+  /* HERO */
+  .hero {
+    height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 60% 50%, #1a1208 0%, var(--black) 70%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+    background-size: 80px 80px;
+  }
+
+  /* CLOCK in HERO */
+  .hero-clock-wrap {
+    position: absolute;
+    right: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .watch-face {
+    width: 340px; height: 340px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #2a2010, #0d0d0d 60%, #050505);
+    border: 2px solid rgba(201,168,76,0.25);
+    box-shadow:
+      0 0 0 8px rgba(201,168,76,0.06),
+      0 0 0 16px rgba(201,168,76,0.03),
+      0 40px 100px rgba(0,0,0,0.8),
+      inset 0 1px 0 rgba(201,168,76,0.2),
+      inset 0 -1px 0 rgba(0,0,0,0.5);
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    animation: watchFloat 6s ease-in-out infinite;
+  }
+  @keyframes watchFloat {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(0.5deg); }
+  }
+
+  /* Bezel ticks */
+  .tick {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform-origin: 0 0;
+  }
+  .tick-inner {
+    position: absolute;
+    background: var(--gold);
+    opacity: 0.7;
+  }
+
+  /* Center dot */
+  .center-dot {
+    width: 10px; height: 10px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: absolute;
+    z-index: 10;
+    box-shadow: 0 0 8px var(--gold);
+  }
+
+  /* Hands */
+  .hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    border-radius: 4px 4px 0 0;
+  }
+  .hand-hour {
+    width: 3px; height: 90px;
+    background: linear-gradient(to top, var(--gold), var(--gold-light));
+    margin-left: -1.5px;
+    box-shadow: 0 0 6px rgba(201,168,76,0.5);
+  }
+  .hand-minute {
+    width: 2px; height: 125px;
+    background: linear-gradient(to top, var(--cream), #fff);
+    margin-left: -1px;
+    opacity: 0.9;
+  }
+  .hand-second {
+    width: 1px; height: 140px;
+    background: #e03030;
+    margin-left: -0.5px;
+    box-shadow: 0 0 4px rgba(220,50,50,0.6);
+  }
+
+  /* Watch numbers */
+  .watch-num {
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--gold-light);
+    letter-spacing: 0;
+  }
+
+  /* Brand on watch */
+  .watch-brand {
+    position: absolute;
+    top: 35%;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: rgba(201,168,76,0.6);
+    text-transform: uppercase;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    left: -5%;
+  }
+  .hero-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 1s 0.5s forwards;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(64px, 8vw, 110px);
+    font-weight: 300;
+    line-height: 0.9;
+    color: var(--cream);
+    opacity: 0;
+    animation: fadeUp 1s 0.8s forwards;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .hero-sub {
+    margin-top: 32px;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--silver);
+    max-width: 300px;
+    line-height: 2;
+    opacity: 0;
+    animation: fadeUp 1s 1.1s forwards;
+  }
+  .hero-cta {
+    margin-top: 52px;
+    display: inline-block;
+    padding: 14px 48px;
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold-light);
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.4s;
+    opacity: 0;
+    animation: fadeUp 1s 1.4s forwards;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-cta::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+    z-index: -1;
+  }
+  .hero-cta:hover { color: var(--black); border-color: var(--gold); }
+  .hero-cta:hover::before { transform: scaleX(1); }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 40px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    opacity: 0; animation: fadeUp 1s 2s forwards;
+  }
+  .scroll-hint span {
+    font-size: 8px; letter-spacing: 0.4em;
+    color: var(--silver); text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%,100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTION BASE */
+  section {
+    padding: 140px 60px;
+    position: relative;
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    margin: 0 auto;
+  }
+
+  /* COLLECTION */
+  .collection {
+    background: var(--charcoal);
+  }
+  .section-label {
+    font-size: 9px;
+    letter-spacing: 0.5em;
+    color: var(--gold);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 300;
+    text-align: center;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 80px;
+  }
+  .section-title em { font-style: italic; color: var(--gold-light); }
+
+  .watches-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .watch-card {
+    background: var(--smoke);
+    padding: 60px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: none;
+  }
+  .watch-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(201,168,76,0.05), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+  .watch-card:hover::before { opacity: 1; }
+  .watch-card:hover { transform: translateY(-8px); }
+
+  /* Mini watch faces for cards */
+  .mini-watch {
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    margin: 0 auto 40px;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .mini-watch-1 {
+    background: radial-gradient(circle at 35% 30%, #1a1208, #050505);
+    border: 1.5px solid rgba(201,168,76,0.3);
+    box-shadow: 0 0 0 4px rgba(201,168,76,0.05), 0 20px 50px rgba(0,0,0,0.6);
+  }
+  .mini-watch-2 {
+    background: radial-gradient(circle at 35% 30%, #0a0f18, #050505);
+    border: 1.5px solid rgba(120,160,220,0.3);
+    box-shadow: 0 0 0 4px rgba(120,160,220,0.05), 0 20px 50px rgba(0,0,0,0.6);
+    border-radius: 16px;
+  }
+  .mini-watch-3 {
+    background: radial-gradient(circle at 35% 30%, #181818, #050505);
+    border: 1.5px solid rgba(200,200,200,0.3);
+    box-shadow: 0 0 0 4px rgba(200,200,200,0.05), 0 20px 50px rgba(0,0,0,0.6);
+  }
+
+  .watch-card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+  .watch-card-ref {
+    font-size: 8px;
+    letter-spacing: 0.4em;
+    color: var(--silver);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .watch-card-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--gold-light);
+    font-weight: 300;
+  }
+  .watch-card-line {
+    width: 40px; height: 1px;
+    background: var(--gold);
+    margin: 20px auto;
+    opacity: 0.4;
+  }
+  .watch-card-desc {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--silver);
+    line-height: 2;
+  }
+
+  /* ABOUT / PHILOSOPHY */
+  .philosophy {
+    background: var(--black);
+    display: flex;
+    gap: 120px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .philosophy-left { flex: 1; }
+  .philosophy-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 120px;
+    font-weight: 300;
+    color: rgba(201,168,76,0.08);
+    line-height: 1;
+    margin-bottom: -40px;
+  }
+  .philosophy-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.1;
+    margin-bottom: 32px;
+  }
+  .philosophy-title em { font-style: italic; color: var(--gold-light); }
+  .philosophy-text {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--silver);
+    line-height: 2.5;
+    margin-bottom: 16px;
+  }
+  .philosophy-right {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .stat-box {
+    border: 1px solid rgba(201,168,76,0.12);
+    padding: 32px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--gold-light);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-label {
+    font-size: 8px;
+    letter-spacing: 0.4em;
+    color: var(--silver);
+    text-transform: uppercase;
+  }
+
+  /* CRAFT */
+  .craft {
+    background: linear-gradient(135deg, var(--charcoal), var(--smoke));
+    text-align: center;
+  }
+  .craft-steps {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-top: 80px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .craft-step {
+    flex: 1;
+    padding: 40px 32px;
+    position: relative;
+    border-top: 1px solid rgba(201,168,76,0.15);
+  }
+  .craft-step::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: 0;
+    height: 1px;
+    width: 0;
+    background: var(--gold);
+    transition: width 0.8s ease;
+  }
+  .craft-step.in-view::before { width: 100%; }
+  .craft-step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px;
+    color: rgba(201,168,76,0.1);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .craft-step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--cream);
+    margin-bottom: 16px;
+  }
+  .craft-step-text {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--silver);
+    line-height: 2;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #050505;
+    border-top: 1px solid rgba(201,168,76,0.1);
+    padding: 80px 60px 40px;
+  }
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 80px;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    color: var(--gold-light);
+    letter-spacing: 0.3em;
+    font-weight: 300;
+  }
+  .footer-tagline {
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    color: var(--silver);
+    margin-top: 8px;
+  }
+  .footer-links {
+    display: flex; gap: 80px;
+  }
+  .footer-col h4 {
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--silver);
+    margin-bottom: 12px;
+    cursor: none;
+    transition: color 0.3s;
+  }
+  .footer-col li:hover { color: var(--cream); }
+  .footer-bottom {
+    border-top: 1px solid rgba(201,168,76,0.08);
+    padding-top: 32px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-bottom p {
+    font-size: 8px; letter-spacing: 0.3em;
+    color: rgba(154,154,154,0.4);
+  }
+
+  /* SCROLL ANIMATIONS */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+
+  /* Gold accent line */
+  .gold-line {
+    width: 60px; height: 1px;
+    background: var(--gold);
+    margin: 32px auto;
+    opacity: 0.5;
+  }
+
+  /* Parallax subtle container */
+  .parallax-wrap { overflow: hidden; }
+
+  /* Watch strap in hero */
+  .strap-top, .strap-bottom {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 56px;
+    background: linear-gradient(to bottom, #1a1008, #0a0804);
+    border-left: 1px solid rgba(201,168,76,0.2);
+    border-right: 1px solid rgba(201,168,76,0.2);
+  }
+  .strap-top {
+    top: -110px;
+    height: 100px;
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+  .strap-bottom {
+    bottom: -110px;
+    height: 100px;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+
+  /* Marquee */
+  .marquee-wrap {
+    overflow: hidden;
+    padding: 32px 0;
+    background: var(--gold);
+  }
+  .marquee-track {
+    display: flex;
+    gap: 80px;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+  .marquee-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    color: var(--black);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .marquee-dot {
+    display: inline-block;
+    width: 4px; height: 4px;
+    background: rgba(8,8,8,0.4);
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 0 20px;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Large decorative text */
+  .large-deco {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(80px, 14vw, 200px);
+    font-weight: 300;
+    color: rgba(201,168,76,0.04);
+    position: absolute;
+    pointer-events: none;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    user-select: none;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Velucci</div>
+  <ul class="nav-links">
+    <li><a href="#collection">Koleksiyon</a></li>
+    <li><a href="#craft">Zanaat</a></li>
+    <li><a href="#philosophy">Felsefe</a></li>
+    <li><a href="#contact">İletişim</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Haute Horlogerie · Est. 1987</p>
+    <h1 class="hero-title">
+      Zamanın<br>
+      <em>Özü</em>
+    </h1>
+    <p class="hero-sub">Her parça, binlerce saatlik ustalık ve tutkuyla hayat bulur. Velucci, sadece zaman göstermez — yaşatır.</p>
+    <a href="#collection" class="hero-cta">Koleksiyonu Keşfet</a>
+  </div>
+
+  <!-- Live Clock Watch Face in Hero -->
+  <div class="hero-clock-wrap">
+    <div class="watch-face" id="heroWatch">
+      <div class="strap-top"></div>
+      <div class="strap-bottom"></div>
+      <span class="watch-brand">Velucci</span>
+      <div class="center-dot"></div>
+      <div class="hand hand-hour" id="hourHand"></div>
+      <div class="hand hand-minute" id="minuteHand"></div>
+      <div class="hand hand-second" id="secondHand"></div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Aşağı Kaydır</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item">Velucci<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Haute Horlogerie<span class="marquee-dot"></span></span>
+    <span class="marquee-item">İsviçre Mekanizması<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Sınırlı Üretim<span class="marquee-dot"></span></span>
+    <span class="marquee-item">El İşçiliği<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Mükemmellik<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Velucci<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Haute Horlogerie<span class="marquee-dot"></span></span>
+    <span class="marquee-item">İsviçre Mekanizması<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Sınırlı Üretim<span class="marquee-dot"></span></span>
+    <span class="marquee-item">El İşçiliği<span class="marquee-dot"></span></span>
+    <span class="marquee-item">Mükemmellik<span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<!-- COLLECTION -->
+<section class="collection" id="collection" style="padding: 140px 60px;">
+  <div class="large-deco" style="top: -40px; right: -40px;">COL</div>
+  <p class="section-label reveal">2025 Koleksiyonu</p>
+  <h2 class="section-title reveal reveal-delay-1">Üç <em>İkon</em></h2>
+  <div class="watches-grid">
+
+    <!-- Card 1 -->
+    <div class="watch-card reveal">
+      <div class="mini-watch mini-watch-1" id="miniWatch1">
+        <div class="center-dot" style="width:6px;height:6px;"></div>
+        <div class="hand hand-hour" style="height:42px;width:2px;margin-left:-1px;" id="mh1"></div>
+        <div class="hand hand-minute" style="height:56px;width:1.5px;margin-left:-0.75px;" id="mm1"></div>
+        <div class="hand hand-second" style="height:62px;width:1px;margin-left:-0.5px;" id="ms1"></div>
+      </div>
+      <div class="watch-card-name">Imperiale</div>
+      <div class="watch-card-ref">Ref. VLI-2025-G</div>
+      <div class="watch-card-line"></div>
+      <div class="watch-card-desc">18 ayar altın kasa<br>El-sarılı tourbillon<br>72 saatlik güç rezervi</div>
+      <div class="watch-card-price" style="margin-top:24px;">₺ 2.850.000</div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="watch-card reveal reveal-delay-1">
+      <div class="mini-watch mini-watch-2" id="miniWatch2">
+        <div class="center-dot" style="width:6px;height:6px;background:#7090cc;box-shadow:0 0 8px #7090cc;"></div>
+        <div class="hand hand-hour" style="height:42px;width:2px;margin-left:-1px;background:linear-gradient(to top,#7090cc,#a0c0ff);" id="mh2"></div>
+        <div class="hand hand-minute" style="height:56px;width:1.5px;margin-left:-0.75px;background:white;" id="mm2"></div>
+        <div class="hand hand-second" style="height:62px;width:1px;margin-left:-0.5px;" id="ms2"></div>
+      </div>
+      <div class="watch-card-name">Nautique</div>
+      <div class="watch-card-ref">Ref. VLN-2025-S</div>
+      <div class="watch-card-line"></div>
+      <div class="watch-card-desc">Titanyum kasa<br>Dalış mekanizması<br>300m su geçirmezlik</div>
+      <div class="watch-card-price" style="margin-top:24px;">₺ 1.240.000</div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="watch-card reveal reveal-delay-2">
+      <div class="mini-watch mini-watch-3" id="miniWatch3">
+        <div class="center-dot" style="width:6px;height:6px;background:#ccc;box-shadow:0 0 8px rgba(200,200,200,0.5);"></div>
+        <div class="hand hand-hour" style="height:42px;width:2px;margin-left:-1px;background:linear-gradient(to top,#888,#ddd);" id="mh3"></div>
+        <div class="hand hand-minute" style="height:56px;width:1.5px;margin-left:-0.75px;background:#eee;" id="mm3"></div>
+        <div class="hand hand-second" style="height:62px;width:1px;margin-left:-0.5px;" id="ms3"></div>
+      </div>
+      <div class="watch-card-name">Classico</div>
+      <div class="watch-card-ref">Ref. VLC-2025-P</div>
+      <div class="watch-card-line"></div>
+      <div class="watch-card-desc">Platin kasa<br>Ay fazı komplikasyonu<br>İnce profil tasarımı</div>
+      <div class="watch-card-price" style="margin-top:24px;">₺ 4.100.000</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy" style="padding: 160px 60px; background: var(--black); overflow:hidden; position:relative;">
+  <div class="large-deco" style="bottom: 0; left: -60px;">1987</div>
+  <div class="philosophy">
+    <div class="philosophy-left">
+      <div class="philosophy-number reveal">38</div>
+      <h2 class="philosophy-title reveal reveal-delay-1">Yıllar içinde<br>olgunlaşan<br><em>ustalık</em></h2>
+      <p class="philosophy-text reveal reveal-delay-2">
+        Velucci, 1987'de İstanbul'un tarihi çarşılarından doğdu. Her saat, tek bir ustanın ellerinde şekil alır, yüzlerce parça birbirine kenetlenir ve kalbinde bir ritim oluşur.
+      </p>
+      <p class="philosophy-text reveal reveal-delay-3">
+        Biz zamana saygı duyarız. Bu yüzden her üretimimizi sınırlı tutarız — çünkü mükemmellik, sabır gerektirir.
+      </p>
+    </div>
+    <div class="philosophy-right">
+      <div class="stat-box reveal">
+        <div class="stat-num">38</div>
+        <div class="stat-label">Yıllık Miras</div>
+      </div>
+      <div class="stat-box reveal reveal-delay-1">
+        <div class="stat-num">847</div>
+        <div class="stat-label">Yıllık Üretim</div>
+      </div>
+      <div class="stat-box reveal reveal-delay-2">
+        <div class="stat-num">12</div>
+        <div class="stat-label">Usta Saatçi</div>
+      </div>
+      <div class="stat-box reveal reveal-delay-3">
+        <div class="stat-num">68</div>
+        <div class="stat-label">Ülkeye İhracat</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CRAFT -->
+<section class="craft" id="craft" style="padding: 160px 60px;">
+  <p class="section-label reveal">Velucci Zanaatı</p>
+  <h2 class="section-title reveal reveal-delay-1">Yaratılış<br><em>Süreci</em></h2>
+  <div class="craft-steps">
+    <div class="craft-step reveal">
+      <div class="craft-step-num">01</div>
+      <div class="craft-step-title">Tasarım</div>
+      <div class="craft-step-text">Her çizgi, yüzyıllık<br>estetik mirasla<br>diyalog kurar.</div>
+    </div>
+    <div class="craft-step reveal reveal-delay-1">
+      <div class="craft-step-num">02</div>
+      <div class="craft-step-title">Döküm</div>
+      <div class="craft-step-text">18 ayar altın veya<br>Grade 5 titanyum<br>el ile şekillendirilir.</div>
+    </div>
+    <div class="craft-step reveal reveal-delay-2">
+      <div class="craft-step-num">03</div>
+      <div class="craft-step-title">Montaj</div>
+      <div class="craft-step-text">350'den fazla parça,<br>tek bir ustanın<br>elinde birleşir.</div>
+    </div>
+    <div class="craft-step reveal reveal-delay-3">
+      <div class="craft-step-num">04</div>
+      <div class="craft-step-title">Kontrol</div>
+      <div class="craft-step-text">720 saatlik sıkı test<br>ve kalibrasyon<br>sürecinden geçer.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">VELUCCI</div>
+      <div class="footer-tagline">Haute Horlogerie · İstanbul</div>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Koleksiyon</h4>
+        <ul>
+          <li>Imperiale</li>
+          <li>Nautique</li>
+          <li>Classico</li>
+          <li>Özel Sipariş</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Marka</h4>
+        <ul>
+          <li>Hakkımızda</li>
+          <li>Zanaatımız</li>
+          <li>Atölyemiz</li>
+          <li>Basın</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>İletişim</h4>
+        <ul>
+          <li>Boutique — Nişantaşı</li>
+          <li>info@velucci.com</li>
+          <li>+90 212 XXX XX XX</li>
+          <li>Randevu Al</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Velucci Haute Horlogerie. Tüm hakları saklıdır.</p>
+    <p>Gizlilik · Kullanım Koşulları</p>
+  </div>
+</footer>
+
+<script>
+// Cursor
+const cursor = document.getElementById('cursor');
+const cursorRing = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 4 + 'px';
+  cursor.style.top = my - 4 + 'px';
+});
+function animRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) *.12;
+  cursorRing.style.left = rx - 18 + 'px';
+  cursorRing.style.top = ry - 18 + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+// CLOCK
+function updateClocks() {
+  const now = new Date();
+  const s = now.getSeconds() + now.getMilliseconds() / 1000;
+  const m = now.getMinutes() + s / 60;
+  const h = (now.getHours() % 12) + m / 60;
+
+  const sDeg = s * 6;
+  const mDeg = m * 6;
+  const hDeg = h * 30;
+
+  // Hero clock
+  document.getElementById('hourHand').style.transform = `rotate(${hDeg}deg)`;
+  document.getElementById('minuteHand').style.transform = `rotate(${mDeg}deg)`;
+  document.getElementById('secondHand').style.transform = `rotate(${sDeg}deg)`;
+
+  // Mini clocks (same time)
+  ['1','2','3'].forEach(i => {
+    const mh = document.getElementById('mh'+i);
+    const mm = document.getElementById('mm'+i);
+    const ms = document.getElementById('ms'+i);
+    if(mh) mh.style.transform = `rotate(${hDeg}deg)`;
+    if(mm) mm.style.transform = `rotate(${mDeg}deg)`;
+    if(ms) ms.style.transform = `rotate(${sDeg}deg)`;
+  });
+}
+setInterval(updateClocks, 50);
+updateClocks();
+
+// Draw ticks on hero watch
+function drawTicks() {
+  const face = document.getElementById('heroWatch');
+  for (let i = 0; i < 60; i++) {
+    const tick = document.createElement('div');
+    const inner = document.createElement('div');
+    const isHour = i % 5 === 0;
+    const angle = i * 6;
+    const r = 155;
+    const rad = (angle - 90) * Math.PI / 180;
+    const x = Math.cos(rad) * r;
+    const y = Math.sin(rad) * r;
+    tick.style.cssText = `position:absolute;top:50%;left:50%;transform:translate(${x}px,${y}px) rotate(${angle}deg);`;
+    inner.style.cssText = `
+      width:${isHour ? 2 : 1}px;
+      height:${isHour ? 12 : 5}px;
+      background:${isHour ? 'rgba(201,168,76,0.8)' : 'rgba(201,168,76,0.3)'};
+      transform:translateX(-50%) translateY(-50%);
+    `;
+    tick.appendChild(inner);
+    face.appendChild(tick);
+  }
+  // Watch numbers 12,3,6,9
+  const nums = [{n:'XII',a:270},{n:'III',a:0},{n:'VI',a:90},{n:'IX',a:180}];
+  nums.forEach(({n,a}) => {
+    const rad = (a - 90) * Math.PI / 180;
+    const x = Math.cos(rad) * 125;
+    const y = Math.sin(rad) * 125;
+    const el = document.createElement('div');
+    el.className = 'watch-num';
+    el.textContent = n;
+    el.style.cssText = `transform:translate(calc(${x}px - 50%), calc(${y}px - 50%));`;
+    face.appendChild(el);
+  });
+}
+drawTicks();
+
+// Scroll Reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      e.target.classList.add('visible');
+      // craft step line
+      if(e.target.classList.contains('craft-step')) {
+        e.target.classList.add('in-view');
+      }
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+reveals.forEach(el => observer.observe(el));
+
+// Parallax on scroll
+window.addEventListener('scroll', () => {
+  const sy = window.scrollY;
+  document.querySelectorAll('.large-deco').forEach((el, i) => {
+    el.style.transform = `translateY(${sy * 0.08 * (i % 2 === 0 ? 1 : -1)}px)`;
+  });
+});
+</script>
+</body>
+</html>
