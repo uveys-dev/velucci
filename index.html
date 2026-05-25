@@ -3,818 +3,695 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VELUCCİ — Türk Saat Markası</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet">
+<title>VELUCCi — Saat Koleksiyonu</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --teal:#2d9e8f;
+  --teal-light:#4dc4b3;
+  --teal-pale:#e8f7f5;
+  --teal-dark:#1a6e63;
+  --cream:#faf9f6;
+  --warm:#f0ece4;
+  --ink:#0f1a18;
+  --ink2:#2a3a36;
+  --silver:#8a9e9a;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--ink);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;cursor:none;}
 
-  :root {
-    --gold: #c9a84c;
-    --gold-light: #e2c97e;
-    --black: #080808;
-    --charcoal: #111111;
-    --smoke: #1a1a1a;
-    --cream: #f5f0e8;
-    --silver: #9a9a9a;
-    --red: #cc3333;
-  }
+.cur{width:10px;height:10px;border-radius:50%;background:var(--teal);position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:multiply;}
+.cur-ring{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--teal);position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:0.5;}
 
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--black);
-    color: var(--cream);
-    font-family: 'Josefin Sans', sans-serif;
-    font-weight: 200;
-    letter-spacing: 0.1em;
-    overflow-x: hidden;
-    cursor: none;
-  }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:22px 60px;transition:background 0.4s,box-shadow 0.4s;}
+nav.scrolled{background:rgba(250,249,246,0.96);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(45,158,143,0.1);}
+.logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;letter-spacing:0.2em;color:var(--ink);text-transform:uppercase;text-decoration:none;}
+.logo span{color:var(--teal);}
+.nav-links{display:flex;gap:36px;list-style:none;}
+.nav-links a{font-size:11px;font-weight:300;letter-spacing:0.25em;text-transform:uppercase;color:var(--ink2);text-decoration:none;transition:color 0.3s;}
+.nav-links a:hover{color:var(--teal);}
+.nav-cta{font-size:10px;letter-spacing:0.3em;text-transform:uppercase;padding:10px 28px;background:var(--teal);color:#fff;text-decoration:none;font-weight:300;transition:all 0.3s;border-radius:2px;}
+.nav-cta:hover{background:var(--teal-dark);}
 
-  .cursor { width:8px;height:8px;background:var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;mix-blend-mode:difference; }
-  .cursor-ring { width:34px;height:34px;border:1px solid var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;opacity:0.5;mix-blend-mode:difference;transition:transform 0.35s ease; }
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 60px 60px;position:relative;overflow:hidden;background:var(--cream);}
+.hero-blob{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(45,158,143,0.1),transparent 70%);right:-150px;top:50%;transform:translateY(-50%);pointer-events:none;animation:blobP 8s ease-in-out infinite;}
+@keyframes blobP{0%,100%{transform:translateY(-50%) scale(1)}50%{transform:translateY(-52%) scale(1.06)}}
 
-  /* TOPBAR */
-  .topbar {
-    background: var(--red);
-    text-align: center;
-    padding: 10px;
-    font-size: 10px;
-    letter-spacing: 0.35em;
-    color: #fff;
-    text-transform: uppercase;
-  }
-  .topbar strong { font-weight: 400; }
+.hero-particles{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.particle{position:absolute;border-radius:50%;background:var(--teal);opacity:0.05;animation:floatUp linear infinite;}
+@keyframes floatUp{0%{transform:translateY(110vh);opacity:0}10%{opacity:0.05}90%{opacity:0.05}100%{transform:translateY(-120px);opacity:0}}
 
-  /* NAV */
-  nav {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(8,8,8,0.97);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(201,168,76,0.1);
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 20px 60px;
-  }
-  .nav-logo img {
-    height: 44px;
-    filter: brightness(1.1);
-  }
-  .nav-links { display:flex;gap:36px;list-style:none; }
-  .nav-links a {
-    color: var(--silver);
-    text-decoration: none;
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    transition: color 0.3s;
-  }
-  .nav-links a:hover { color: var(--gold-light); }
-  .nav-right { display:flex;align-items:center;gap:24px; }
-  .nav-cart {
-    font-size: 9px;
-    letter-spacing: 0.3em;
-    color: var(--gold);
-    border: 1px solid rgba(201,168,76,0.3);
-    padding: 8px 20px;
-    text-decoration: none;
-    transition: all 0.3s;
-    text-transform: uppercase;
-  }
-  .nav-cart:hover { background: var(--gold); color: var(--black); }
+.hero-left{position:relative;z-index:2;}
+.hero-tag{display:inline-flex;align-items:center;gap:10px;background:var(--teal-pale);padding:8px 18px;border-radius:100px;font-size:10px;letter-spacing:0.3em;color:var(--teal-dark);text-transform:uppercase;margin-bottom:32px;opacity:0;animation:sldIn 0.8s 0.2s forwards;}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+@keyframes sldIn{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
 
-  /* HERO */
-  .hero {
-    height: 90vh;
-    position: relative;
-    overflow: hidden;
-    display: flex; align-items: center;
-  }
-  .hero-bg-img {
-    position: absolute; inset: 0;
-    background-image: url('https://www.velucci.com.tr/uploads/banner.jpg');
-    background-size: cover;
-    background-position: center;
-    filter: brightness(0.45);
-    transform: scale(1.05);
-    transition: transform 8s ease;
-  }
-  .hero-bg-img.loaded { transform: scale(1); }
-  .hero-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(90deg, rgba(8,8,8,0.85) 40%, transparent 100%);
-  }
-  .hero-content {
-    position: relative; z-index: 2;
-    padding: 0 80px;
-    max-width: 700px;
-  }
-  .hero-badge {
-    display: inline-block;
-    background: var(--red);
-    color: #fff;
-    font-size: 9px;
-    letter-spacing: 0.4em;
-    padding: 6px 16px;
-    text-transform: uppercase;
-    margin-bottom: 28px;
-    opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
-  }
-  .hero-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(52px, 7vw, 96px);
-    font-weight: 300;
-    line-height: 0.95;
-    color: var(--cream);
-    opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
-  }
-  .hero-title em { font-style: italic; color: var(--gold-light); }
-  .hero-sub {
-    margin-top: 28px;
-    font-size: 11px;
-    letter-spacing: 0.25em;
-    color: rgba(245,240,232,0.7);
-    line-height: 2;
-    opacity: 0; animation: fadeUp 0.9s 0.8s forwards;
-  }
-  .hero-actions {
-    margin-top: 48px;
-    display: flex; gap: 16px;
-    opacity: 0; animation: fadeUp 0.9s 1s forwards;
-  }
-  .btn-primary {
-    padding: 14px 44px;
-    background: var(--gold);
-    color: var(--black);
-    font-size: 9px;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    text-decoration: none;
-    font-family: 'Josefin Sans', sans-serif;
-    font-weight: 300;
-    transition: all 0.3s;
-    border: none; cursor: none;
-  }
-  .btn-primary:hover { background: var(--gold-light); }
-  .btn-secondary {
-    padding: 14px 44px;
-    border: 1px solid rgba(245,240,232,0.3);
-    color: var(--cream);
-    font-size: 9px;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    text-decoration: none;
-    font-family: 'Josefin Sans', sans-serif;
-    font-weight: 200;
-    transition: all 0.3s;
-    cursor: none;
-  }
-  .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(50px,6vw,86px);font-weight:900;line-height:0.95;color:var(--ink);margin-bottom:28px;opacity:0;animation:sldIn 0.9s 0.4s forwards;}
+.hero-title .tc{color:var(--teal);}
+.hero-title .it{font-style:italic;font-weight:400;}
+.hero-desc{font-size:14px;line-height:1.9;color:var(--silver);max-width:360px;margin-bottom:44px;letter-spacing:0.02em;opacity:0;animation:sldIn 0.9s 0.6s forwards;}
+.hero-actions{display:flex;align-items:center;gap:24px;opacity:0;animation:sldIn 0.9s 0.8s forwards;}
+.btn-main{padding:14px 44px;background:var(--ink);color:#fff;font-size:11px;letter-spacing:0.3em;text-transform:uppercase;text-decoration:none;font-family:'DM Sans',sans-serif;transition:all 0.4s;border-radius:2px;font-weight:300;}
+.btn-main:hover{background:var(--teal);transform:translateY(-2px);}
+.btn-out{font-size:11px;letter-spacing:0.2em;color:var(--teal);text-decoration:none;text-transform:uppercase;border-bottom:1px solid rgba(45,158,143,0.3);padding-bottom:2px;transition:all 0.3s;}
+.hero-stats{display:flex;gap:36px;margin-top:56px;opacity:0;animation:sldIn 0.9s 1s forwards;}
+.stat{border-left:2px solid var(--teal-pale);padding-left:14px;}
+.stat-num{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--ink);}
+.stat-label{font-size:9px;letter-spacing:0.3em;color:var(--silver);text-transform:uppercase;margin-top:2px;}
 
-  /* CLOCK */
-  .hero-clock {
-    position: absolute;
-    right: 8%;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 2;
-  }
-  .watch-face {
-    width: 300px; height: 300px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #1e150a, #050505 70%);
-    border: 1.5px solid rgba(201,168,76,0.3);
-    box-shadow: 0 0 0 8px rgba(201,168,76,0.04), 0 0 0 16px rgba(201,168,76,0.02), 0 40px 80px rgba(0,0,0,0.7), inset 0 1px 0 rgba(201,168,76,0.15);
-    position: relative;
-    display: flex; align-items: center; justify-content: center;
-    animation: watchFloat 6s ease-in-out infinite;
-  }
-  @keyframes watchFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-  .strap { position:absolute;left:50%;transform:translateX(-50%);width:50px;background:linear-gradient(to bottom,#1a0f05,#0a0804);border-left:1px solid rgba(201,168,76,0.15);border-right:1px solid rgba(201,168,76,0.15); }
-  .strap-top { top:-100px;height:92px; }
-  .strap-bottom { bottom:-100px;height:92px; }
-  .watch-brand-label {
-    position:absolute;top:34%;
-    font-family:'Cormorant Garamond',serif;
-    font-size:9px;letter-spacing:0.5em;
-    color:rgba(201,168,76,0.55);text-transform:uppercase;
-  }
-  .watch-sub-label {
-    position:absolute;top:42%;
-    font-size:7px;letter-spacing:0.3em;
-    color:rgba(154,154,154,0.4);text-transform:uppercase;
-  }
-  .center-dot { width:9px;height:9px;background:var(--gold);border-radius:50%;position:absolute;z-index:10;box-shadow:0 0 6px var(--gold); }
-  .hand { position:absolute;bottom:50%;left:50%;transform-origin:bottom center;border-radius:3px 3px 0 0; }
-  .hand-hour { width:3px;height:80px;background:linear-gradient(to top,var(--gold),var(--gold-light));margin-left:-1.5px;box-shadow:0 0 5px rgba(201,168,76,0.4); }
-  .hand-minute { width:2px;height:112px;background:#f0ece4;margin-left:-1px; }
-  .hand-second { width:1px;height:125px;background:#e03030;margin-left:-0.5px; }
+/* HERO RIGHT — real watch photo floating */
+.hero-right{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;min-height:80vh;}
+.hero-watch-wrap{position:relative;width:380px;height:480px;}
+.hero-watch-img{
+  width:320px;
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  border-radius:24px;
+  object-fit:cover;
+  filter:drop-shadow(0 40px 80px rgba(45,158,143,0.3)) drop-shadow(0 10px 30px rgba(0,0,0,0.12));
+  animation:watchDrift 7s ease-in-out infinite;
+}
+@keyframes watchDrift{0%,100%{transform:translate(-50%,-50%) rotate(-3deg)}25%{transform:translate(-48%,-53%) rotate(2deg)}50%{transform:translate(-52%,-47%) rotate(-1deg)}75%{transform:translate(-50%,-55%) rotate(2.5deg)}}
 
-  @keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+.orbit{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;border:1px dashed rgba(45,158,143,0.15);pointer-events:none;}
+.orbit-1{width:360px;height:360px;animation:spin 22s linear infinite;}
+.orbit-2{width:460px;height:460px;animation:spin 32s linear infinite reverse;}
+.orbit-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--teal);top:50%;left:0;transform:translate(-50%,-50%);}
+@keyframes spin{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
 
-  /* MARQUEE */
-  .marquee-wrap { overflow:hidden;padding:24px 0;background:var(--gold); }
-  .marquee-track { display:flex;gap:64px;animation:marquee 18s linear infinite;white-space:nowrap; }
-  .marquee-item { font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:300;letter-spacing:0.3em;color:var(--black);text-transform:uppercase;flex-shrink:0; }
-  .marquee-dot { display:inline-block;width:4px;height:4px;background:rgba(8,8,8,0.3);border-radius:50%;vertical-align:middle;margin:0 16px; }
-  @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.watch-tag{position:absolute;background:#fff;border:1px solid rgba(45,158,143,0.15);border-radius:100px;padding:8px 16px;font-size:10px;letter-spacing:0.15em;color:var(--ink2);box-shadow:0 4px 20px rgba(0,0,0,0.06);white-space:nowrap;animation:tagF ease-in-out infinite;}
+.wt1{top:8%;right:-5%;animation-duration:5s;}
+.wt2{bottom:22%;left:-12%;animation-duration:6s;animation-delay:1s;}
+.wt3{top:45%;right:-18%;animation-duration:4.5s;animation-delay:0.5s;}
+@keyframes tagF{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
-  /* SERILER */
-  .seriler { padding: 120px 60px; background: var(--charcoal); }
-  .section-label { font-size:9px;letter-spacing:0.5em;color:var(--gold);text-transform:uppercase;text-align:center;margin-bottom:12px; }
-  .section-title { font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,56px);font-weight:300;text-align:center;color:var(--cream);line-height:1.1;margin-bottom:72px; }
-  .section-title em { font-style:italic;color:var(--gold-light); }
+.scroll-ind{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:sldIn 1s 1.6s forwards;}
+.scroll-ind span{font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:var(--silver);}
+.scroll-bar{width:1px;height:60px;background:linear-gradient(to bottom,var(--teal),transparent);animation:barP 2s ease-in-out infinite;}
+@keyframes barP{0%,100%{opacity:0.4}50%{opacity:1}}
 
-  .series-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 2px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .series-card {
-    background: var(--smoke);
-    padding: 40px 24px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    cursor: none;
-    transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
-    border-top: 2px solid transparent;
-  }
-  .series-card:hover { transform: translateY(-6px); border-top-color: var(--gold); }
-  .series-icon {
-    width: 64px; height: 64px;
-    border-radius: 50%;
-    margin: 0 auto 24px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 24px;
-  }
-  .series-name { font-family:'Cormorant Garamond',serif;font-size:18px;color:var(--cream);margin-bottom:6px; }
-  .series-count { font-size:8px;letter-spacing:0.35em;color:var(--silver);text-transform:uppercase; }
+/* MARQUEE */
+.mq-wrap{overflow:hidden;padding:18px 0;background:var(--ink);}
+.mq-track{display:flex;gap:0;animation:marquee 18s linear infinite;white-space:nowrap;}
+.mq-item{font-family:'Playfair Display',serif;font-size:13px;font-style:italic;color:rgba(255,255,255,0.15);letter-spacing:0.1em;flex-shrink:0;padding:0 36px;border-right:1px solid rgba(255,255,255,0.05);}
+.mq-item.hi{color:rgba(77,196,179,0.55);}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-  /* ÜRÜNLER */
-  .urunler { padding: 120px 60px; background: var(--black); }
-  .products-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2px;
-    max-width: 1300px;
-    margin: 0 auto;
-  }
-  .product-card {
-    background: var(--smoke);
-    overflow: hidden;
-    position: relative;
-    cursor: none;
-    group: true;
-  }
-  .product-img-wrap {
-    position: relative;
-    overflow: hidden;
-    aspect-ratio: 3/4;
-    background: #111;
-  }
-  .product-img-wrap img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    transition: transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
-    display: block;
-  }
-  .product-card:hover .product-img-wrap img { transform: scale(1.07); }
-  .product-badge {
-    position: absolute; top: 16px; left: 16px;
-    background: var(--red);
-    color: #fff;
-    font-size: 8px;
-    letter-spacing: 0.3em;
-    padding: 4px 10px;
-    text-transform: uppercase;
-  }
-  .product-info { padding: 24px 20px; }
-  .product-cat { font-size:8px;letter-spacing:0.4em;color:var(--gold);text-transform:uppercase;margin-bottom:6px; }
-  .product-name { font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--cream);margin-bottom:12px;line-height:1.2; }
-  .product-footer { display:flex;align-items:center;justify-content:space-between; }
-  .product-price { font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--gold-light); }
-  .product-btn {
-    font-size:8px;letter-spacing:0.3em;color:var(--silver);text-transform:uppercase;
-    border-bottom:1px solid rgba(154,154,154,0.3);padding-bottom:2px;
-    text-decoration:none;transition:all 0.3s;
-  }
-  .product-btn:hover { color:var(--gold);border-color:var(--gold); }
+/* SCENES */
+.scene{min-height:100vh;display:flex;align-items:center;padding:0 60px;position:relative;overflow:hidden;}
+.sc-warm{background:var(--warm);}
+.sc-teal{background:var(--teal-pale);}
+.sc-dark{background:var(--ink);color:#fff;}
+.sc-cream{background:var(--cream);}
 
-  /* KAMPANYA */
-  .kampanya {
-    padding: 100px 60px;
-    background: linear-gradient(135deg, #1a0d00, #0d0a05);
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .kampanya::before {
-    content: '3';
-    position: absolute;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 400px;
-    color: rgba(201,168,76,0.04);
-    top: -100px; left: -50px;
-    line-height: 1;
-    pointer-events: none;
-  }
-  .kampanya-label { font-size:9px;letter-spacing:0.5em;color:var(--gold);text-transform:uppercase;margin-bottom:16px; }
-  .kampanya-title {
-    font-family:'Cormorant Garamond',serif;
-    font-size:clamp(36px,5vw,72px);
-    font-weight:300;color:var(--cream);
-    margin-bottom:16px;line-height:1.1;
-  }
-  .kampanya-title em { font-style:italic;color:var(--gold-light); }
-  .kampanya-sub { font-size:10px;letter-spacing:0.25em;color:var(--silver);margin-bottom:48px;line-height:2; }
-  .kampanya-price {
-    display:inline-flex;align-items:center;gap:32px;
-    border:1px solid rgba(201,168,76,0.2);
-    padding:24px 48px;margin-bottom:40px;
-  }
-  .kp-label { font-size:9px;letter-spacing:0.3em;color:var(--silver);text-transform:uppercase; }
-  .kp-val { font-family:'Cormorant Garamond',serif;font-size:42px;color:var(--gold-light);font-weight:300; }
-  .kp-divider { width:1px;height:40px;background:rgba(201,168,76,0.2); }
+.sc-content{flex:1;position:relative;z-index:2;padding-right:40px;}
+.sc-watch{flex:1;display:flex;align-items:center;justify-content:center;position:relative;}
+.sc-watch-wrap{position:relative;width:320px;height:420px;display:flex;align-items:center;justify-content:center;}
 
-  /* ABOUT */
-  .about {
-    padding: 140px 80px;
-    background: var(--charcoal);
-    display: flex; gap: 100px; align-items: center;
-    max-width: 1300px; margin: 0 auto;
-  }
-  .about-left { flex:1; }
-  .about-big { font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,56px);font-weight:300;color:var(--cream);line-height:1.1;margin-bottom:32px; }
-  .about-big em { font-style:italic;color:var(--gold-light); }
-  .about-text { font-size:10px;letter-spacing:0.2em;color:var(--silver);line-height:2.5;margin-bottom:16px; }
-  .about-right { flex:1;display:grid;grid-template-columns:1fr 1fr;gap:2px; }
-  .about-img-box {
-    aspect-ratio:1;overflow:hidden;background:#111;
-  }
-  .about-img-box img { width:100%;height:100%;object-fit:cover;filter:grayscale(20%); }
-  .about-img-box:first-child { grid-column:1/-1; aspect-ratio:2/1; }
+/* Real photo in scene */
+.sc-img{
+  width:260px;
+  border-radius:20px;
+  object-fit:cover;
+  position:relative;z-index:2;
+  transition:transform 1s cubic-bezier(0.16,1,0.3,1),filter 0.5s;
+}
+.sc-img-shadow{filter:drop-shadow(0 30px 60px rgba(45,158,143,0.25)) drop-shadow(0 8px 24px rgba(0,0,0,0.1));}
+.sc-img-dark{filter:drop-shadow(0 0 40px rgba(45,158,143,0.4)) drop-shadow(0 20px 60px rgba(0,0,0,0.6));}
+.sc-img-teal{filter:drop-shadow(0 30px 60px rgba(45,158,143,0.35)) drop-shadow(0 8px 24px rgba(0,0,0,0.08));}
 
-  /* CIFT */
-  .cift {
-    padding: 120px 60px;
-    background: var(--black);
-    text-align: center;
-  }
-  .cift-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    max-width: 1100px;
-    margin: 60px auto 0;
-  }
-  .cift-card {
-    position: relative; overflow: hidden;
-    aspect-ratio: 3/4;
-    cursor: none;
-  }
-  .cift-card img { width:100%;height:100%;object-fit:cover;filter:brightness(0.7);transition:transform 0.7s ease,filter 0.5s; }
-  .cift-card:hover img { transform:scale(1.06);filter:brightness(0.55); }
-  .cift-overlay {
-    position:absolute;inset:0;
-    display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
-    padding:32px;background:linear-gradient(to top,rgba(8,8,8,0.85),transparent 50%);
-  }
-  .cift-name { font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--cream);margin-bottom:4px; }
-  .cift-price { font-size:14px;color:var(--gold-light); }
+/* Second image offset in scene 2 */
+.sc-img-back{
+  width:220px;border-radius:18px;object-fit:cover;
+  position:absolute;
+  filter:drop-shadow(0 20px 40px rgba(0,0,0,0.12));
+  opacity:0.75;
+  transition:transform 1s cubic-bezier(0.16,1,0.3,1);
+}
 
-  /* FOOTER */
-  footer {
-    background:#050505;border-top:1px solid rgba(201,168,76,0.1);
-    padding:80px 60px 40px;
-  }
-  .footer-top { display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:64px; }
-  .footer-logo img { height:40px;filter:brightness(1.1); }
-  .footer-tagline { font-size:9px;letter-spacing:0.3em;color:var(--silver);margin-top:12px; }
-  .footer-links { display:flex;gap:80px; }
-  .footer-col h4 { font-size:9px;letter-spacing:0.4em;color:var(--gold);text-transform:uppercase;margin-bottom:24px; }
-  .footer-col ul { list-style:none; }
-  .footer-col li { font-size:9px;letter-spacing:0.2em;color:var(--silver);margin-bottom:12px;cursor:none;transition:color 0.3s; }
-  .footer-col li:hover { color:var(--cream); }
-  .footer-bottom { border-top:1px solid rgba(201,168,76,0.08);padding-top:28px;display:flex;justify-content:space-between;align-items:center; }
-  .footer-bottom p { font-size:8px;letter-spacing:0.25em;color:rgba(154,154,154,0.4); }
-  .footer-social { display:flex;gap:20px; }
-  .footer-social a { font-size:8px;letter-spacing:0.3em;color:rgba(154,154,154,0.5);text-decoration:none;text-transform:uppercase;transition:color 0.3s; }
-  .footer-social a:hover { color:var(--gold); }
+.s-label{font-size:10px;letter-spacing:0.5em;text-transform:uppercase;color:var(--teal);margin-bottom:18px;display:flex;align-items:center;gap:12px;}
+.s-label::before{content:'';width:30px;height:1px;background:var(--teal);}
+.sc-dark .s-label{color:var(--teal-light);}
+.sc-dark .s-label::before{background:var(--teal-light);}
+.s-title{font-family:'Playfair Display',serif;font-size:clamp(34px,4vw,58px);font-weight:700;line-height:1.05;margin-bottom:22px;}
+.s-title em{font-style:italic;color:var(--teal);}
+.sc-dark .s-title em{color:var(--teal-light);}
+.sc-dark .s-title{color:#fff;}
+.s-desc{font-size:13px;line-height:2;color:var(--silver);max-width:380px;margin-bottom:32px;}
+.sc-dark .s-desc{color:rgba(255,255,255,0.45);}
 
-  /* REVEAL */
-  .reveal { opacity:0;transform:translateY(36px);transition:opacity 0.9s cubic-bezier(0.25,0.46,0.45,0.94),transform 0.9s cubic-bezier(0.25,0.46,0.45,0.94); }
-  .reveal.visible { opacity:1;transform:translateY(0); }
-  .reveal-delay-1 { transition-delay:0.12s; }
-  .reveal-delay-2 { transition-delay:0.24s; }
-  .reveal-delay-3 { transition-delay:0.36s; }
-  .reveal-delay-4 { transition-delay:0.48s; }
+.scene-bg-txt{position:absolute;font-family:'Playfair Display',serif;font-size:clamp(100px,16vw,220px);font-weight:900;opacity:0.03;pointer-events:none;line-height:1;white-space:nowrap;color:var(--teal);}
+.sc-dark .scene-bg-txt{opacity:0.04;color:#fff;}
 
-  .gold-line { width:48px;height:1px;background:var(--gold);margin:0 auto 60px;opacity:0.4; }
+/* GLOW ring */
+.gring{position:absolute;border-radius:50%;border:1px solid rgba(45,158,143,0.12);pointer-events:none;animation:gP 4s ease-in-out infinite;}
+@keyframes gP{0%,100%{transform:scale(1);opacity:0.5}50%{transform:scale(1.04);opacity:1}}
 
-  /* SCROLL HINT */
-  .scroll-hint { position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp 1s 1.4s forwards; }
-  .scroll-hint span { font-size:8px;letter-spacing:0.4em;color:var(--silver);text-transform:uppercase; }
-  .scroll-line { width:1px;height:56px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s ease-in-out infinite; }
-  @keyframes scrollPulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+/* PRODUCTS */
+.products{padding:120px 60px;background:var(--cream);}
+.sec-label{font-size:9px;letter-spacing:0.5em;text-transform:uppercase;color:var(--teal);text-align:center;margin-bottom:12px;}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(34px,4vw,54px);font-weight:700;text-align:center;color:var(--ink);margin-bottom:72px;line-height:1.1;}
+.sec-title em{font-style:italic;color:var(--teal);}
+
+.pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;max-width:1260px;margin:0 auto;}
+.pcard{background:#fff;border-radius:6px;overflow:hidden;position:relative;transition:transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94),box-shadow 0.5s;cursor:none;}
+.pcard:hover{transform:translateY(-10px);box-shadow:0 28px 70px rgba(45,158,143,0.13);}
+.pimg{aspect-ratio:3/3.6;overflow:hidden;background:var(--teal-pale);position:relative;}
+.pimg img{width:100%;height:100%;object-fit:cover;transition:transform 0.7s ease;}
+.pcard:hover .pimg img{transform:scale(1.05);}
+.pbadge{position:absolute;top:14px;left:14px;background:var(--teal);color:#fff;font-size:8px;letter-spacing:0.3em;padding:4px 10px;border-radius:100px;text-transform:uppercase;}
+.pinfo{padding:22px 20px;}
+.pcat{font-size:8px;letter-spacing:0.4em;color:var(--teal);text-transform:uppercase;margin-bottom:5px;}
+.pname{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:14px;}
+.pfooter{display:flex;align-items:center;justify-content:space-between;}
+.pprice{font-family:'Playfair Display',serif;font-size:22px;color:var(--ink);}
+.plink{font-size:9px;letter-spacing:0.3em;color:var(--teal);text-decoration:none;text-transform:uppercase;border-bottom:1px solid rgba(45,158,143,0.3);padding-bottom:2px;transition:all 0.3s;}
+.plink:hover{letter-spacing:0.4em;}
+
+/* KAMPANYA */
+.kampanya{padding:120px 60px;background:var(--teal);text-align:center;position:relative;overflow:hidden;}
+.kampanya::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 25% 50%,rgba(255,255,255,0.08),transparent 55%),radial-gradient(circle at 75% 50%,rgba(0,0,0,0.08),transparent 55%);}
+.k-label{font-size:10px;letter-spacing:0.5em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:16px;}
+.k-title{font-family:'Playfair Display',serif;font-size:clamp(44px,7vw,96px);font-weight:900;color:#fff;line-height:0.95;margin-bottom:20px;}
+.k-title em{font-style:italic;font-weight:400;}
+.k-sub{font-size:14px;color:rgba(255,255,255,0.65);margin-bottom:44px;line-height:1.8;}
+.k-box{display:inline-flex;align-items:center;gap:0;border:1px solid rgba(255,255,255,0.2);border-radius:4px;overflow:hidden;margin-bottom:44px;}
+.k-item{padding:20px 36px;text-align:center;border-right:1px solid rgba(255,255,255,0.2);}
+.k-item:last-child{border-right:none;background:rgba(255,255,255,0.08);}
+.k-num{font-family:'Playfair Display',serif;font-size:38px;color:#fff;font-weight:700;}
+.k-lbl{font-size:8px;letter-spacing:0.3em;color:rgba(255,255,255,0.45);text-transform:uppercase;margin-top:4px;}
+.btn-white{padding:14px 48px;background:#fff;color:var(--teal);font-size:11px;letter-spacing:0.3em;text-transform:uppercase;text-decoration:none;font-weight:400;border-radius:2px;transition:all 0.3s;display:inline-block;}
+.btn-white:hover{background:var(--ink);color:#fff;}
+
+/* FOOTER */
+footer{background:var(--ink);padding:90px 60px 44px;color:#fff;}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:52px;margin-bottom:72px;}
+.fb{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;letter-spacing:0.15em;color:#fff;margin-bottom:14px;}
+.fb span{color:var(--teal-light);}
+.ft{font-size:12px;color:rgba(255,255,255,0.3);line-height:1.8;max-width:220px;}
+.fh{font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:var(--teal-light);margin-bottom:22px;}
+.fl{list-style:none;}
+.fl li{margin-bottom:10px;}
+.fl a{font-size:12px;color:rgba(255,255,255,0.35);text-decoration:none;letter-spacing:0.05em;transition:color 0.3s;cursor:none;}
+.fl a:hover{color:#fff;}
+.fbot{border-top:1px solid rgba(255,255,255,0.06);padding-top:28px;display:flex;justify-content:space-between;align-items:center;}
+.fbot p{font-size:11px;color:rgba(255,255,255,0.18);letter-spacing:0.1em;}
+.insta{font-size:11px;letter-spacing:0.2em;color:var(--teal-light);text-decoration:none;text-transform:uppercase;transition:color 0.3s;}
+.insta:hover{color:#fff;}
+
+/* REVEAL */
+.rev{opacity:0;transform:translateY(50px);transition:opacity 0.9s cubic-bezier(0.16,1,0.3,1),transform 0.9s cubic-bezier(0.16,1,0.3,1);}
+.rev.on{opacity:1;transform:translateY(0);}
+.d1{transition-delay:0.1s;}.d2{transition-delay:0.2s;}.d3{transition-delay:0.3s;}.d4{transition-delay:0.4s;}
 </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
-
-<!-- TOPBAR -->
-<div class="topbar">
-  🎁 Tüm ürünlerde <strong>3 AL 2 ÖDE</strong> kampanyası devam ediyor — Kaçırmayın!
-</div>
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
 
 <!-- NAV -->
-<nav>
-  <div class="nav-logo">
-    <a href="#"><img src="https://www.velucci.com.tr/uploads/logo.png" alt="Velucci" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'font-family:Cormorant Garamond,serif;font-size:22px;color:#e2c97e;letter-spacing:0.4em;\'>VELUCCİ</span>'"></a>
-  </div>
+<nav id="nav">
+  <a href="#" class="logo">VELU<span>CC</span>i</a>
   <ul class="nav-links">
-    <li><a href="#seriler">Seriler</a></li>
-    <li><a href="#urunler">Ürünler</a></li>
+    <li><a href="#koleksiyon">Koleksiyon</a></li>
     <li><a href="#kampanya">Kampanya</a></li>
-    <li><a href="#iletisim">İletişim</a></li>
+    <li><a href="#hakkimizda">Hakkımızda</a></li>
   </ul>
-  <div class="nav-right">
-    <a href="https://www.velucci.com.tr" class="nav-cart" target="_blank">Mağazaya Git →</a>
-  </div>
+  <a href="https://www.velucci.com.tr" class="nav-cta" target="_blank">Mağaza →</a>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-bg-img" id="heroBg"></div>
-  <div class="hero-overlay"></div>
+<section class="hero" id="hero">
+  <div class="hero-blob"></div>
+  <div class="hero-particles" id="ptcl"></div>
 
-  <div class="hero-content">
-    <span class="hero-badge">🇹🇷 Yerli Saat Markası</span>
+  <div class="hero-left">
+    <div class="hero-tag">🟢 Yeni Koleksiyon 2025</div>
     <h1 class="hero-title">
-      Türkiye'nin<br>
-      <em>Tarzı</em><br>
-      Bileğinde
+      Bileğinde<br>
+      <span class="tc it">Su Yeşili</span><br>
+      Taş
     </h1>
-    <p class="hero-sub">Velucci ile her an özel. Kadın, erkek ve çift modelleriyle<br>950₺'den başlayan fiyatlarla premium saat deneyimi.</p>
+    <p class="hero-desc">Velucci Su Serisi — doğanın en derin renginden ilham alan tasarımlar. Her model, benzersiz bir his.</p>
     <div class="hero-actions">
-      <a href="#urunler" class="btn-primary">Koleksiyonu Gör</a>
-      <a href="#kampanya" class="btn-secondary">3 Al 2 Öde</a>
+      <a href="#koleksiyon" class="btn-main">Koleksiyonu Keşfet</a>
+      <a href="#kampanya" class="btn-out">3 Al 2 Öde →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">950₺</div><div class="stat-label">Başlayan fiyat</div></div>
+      <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Farklı seri</div></div>
+      <div class="stat"><div class="stat-num">🇹🇷</div><div class="stat-label">Yerli marka</div></div>
     </div>
   </div>
 
-  <!-- Live Clock -->
-  <div class="hero-clock">
-    <div class="watch-face" id="heroWatch">
-      <div class="strap strap-top"></div>
-      <div class="strap strap-bottom"></div>
-      <span class="watch-brand-label">Velucci</span>
-      <span class="watch-sub-label">Türkiye</span>
-      <div class="center-dot"></div>
-      <div class="hand hand-hour" id="hourHand"></div>
-      <div class="hand hand-minute" id="minuteHand"></div>
-      <div class="hand hand-second" id="secondHand"></div>
+  <div class="hero-right">
+    <div class="hero-watch-wrap">
+      <div class="orbit orbit-1"><div class="orbit-dot"></div></div>
+      <div class="orbit orbit-2"><div class="orbit-dot" style="left:auto;right:0;transform:translate(50%,-50%);background:rgba(45,158,143,0.35);width:5px;height:5px;"></div></div>
+      <div class="watch-tag wt1">Su Yeşili ✦</div>
+      <div class="watch-tag wt2">950 ₺</div>
+      <div class="watch-tag wt3">Türk Tasarımı</div>
+      <!-- GERÇEK FOTOĞRAF: Su Yeşili -->
+      <img class="hero-watch-img"
+        src="https://www.velucci.com.tr/uploads/product/69acb26e9a9c6IMG_3052.jpeg"
+        alt="Velucci Su Yeşili Saat"
+        onerror="this.src='https://www.velucci.com.tr/uploads/product/696e2d327a7aaIMG_1603.jpeg'">
     </div>
   </div>
 
-  <div class="scroll-hint">
-    <span>Keşfet</span>
-    <div class="scroll-line"></div>
+  <div class="scroll-ind">
+    <span>Aşağı Kaydır</span>
+    <div class="scroll-bar"></div>
   </div>
 </section>
 
 <!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <span class="marquee-item">Velucci<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Nova Serisi<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Su Serisi<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Mono Serisi<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Çift Saatler<span class="marquee-dot"></span></span>
-    <span class="marquee-item">3 Al 2 Öde<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Türk Tasarımı<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Velucci<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Nova Serisi<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Su Serisi<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Mono Serisi<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Çift Saatler<span class="marquee-dot"></span></span>
-    <span class="marquee-item">3 Al 2 Öde<span class="marquee-dot"></span></span>
-    <span class="marquee-item">Türk Tasarımı<span class="marquee-dot"></span></span>
+<div class="mq-wrap">
+  <div class="mq-track">
+    <span class="mq-item hi">Velucci</span><span class="mq-item">Su Serisi</span><span class="mq-item hi">Nova</span><span class="mq-item">Kaya</span><span class="mq-item hi">Toprak</span><span class="mq-item">Mono Serisi</span><span class="mq-item hi">Form Serisi</span><span class="mq-item">Çift Saatler</span><span class="mq-item hi">Iconic</span><span class="mq-item">Soft Serisi</span>
+    <span class="mq-item hi">Velucci</span><span class="mq-item">Su Serisi</span><span class="mq-item hi">Nova</span><span class="mq-item">Kaya</span><span class="mq-item hi">Toprak</span><span class="mq-item">Mono Serisi</span><span class="mq-item hi">Form Serisi</span><span class="mq-item">Çift Saatler</span><span class="mq-item hi">Iconic</span><span class="mq-item">Soft Serisi</span>
   </div>
 </div>
 
-<!-- SERİLER -->
-<section class="seriler" id="seriler">
-  <p class="section-label reveal">Koleksiyonlar</p>
-  <h2 class="section-title reveal reveal-delay-1">Hangi <em>Seriye</em> Aitsin?</h2>
-  <div class="gold-line reveal reveal-delay-2"></div>
-  <div class="series-grid">
-    <div class="series-card reveal">
-      <div class="series-icon" style="background:rgba(201,168,76,0.1);">💧</div>
-      <div class="series-name">Su Serisi</div>
-      <div class="series-count">Su Temalı Tasarım</div>
-    </div>
-    <div class="series-card reveal reveal-delay-1">
-      <div class="series-icon" style="background:rgba(80,80,80,0.2);">⬛</div>
-      <div class="series-name">Mono Serisi</div>
-      <div class="series-count">Minimalist Çizgi</div>
-    </div>
-    <div class="series-card reveal reveal-delay-2">
-      <div class="series-icon" style="background:rgba(201,168,76,0.08);">💑</div>
-      <div class="series-name">Çift Saatleri</div>
-      <div class="series-count">Sevgiliye Özel</div>
-    </div>
-    <div class="series-card reveal reveal-delay-3">
-      <div class="series-icon" style="background:rgba(100,150,200,0.1);">🔷</div>
-      <div class="series-name">Form Serisi</div>
-      <div class="series-count">Geometrik Tasarım</div>
-    </div>
-    <div class="series-card reveal reveal-delay-4">
-      <div class="series-icon" style="background:rgba(201,168,76,0.12);">⭐</div>
-      <div class="series-name">Iconic Serisi</div>
-      <div class="series-count">Öne Çıkan Modeller</div>
+<!-- SCENE 1: SU SERiSi — döner -->
+<section class="scene sc-warm" id="scene1">
+  <div class="scene-bg-txt" style="bottom:-50px;left:-30px;">SU</div>
+  <div class="sc-content rev" id="sc1c">
+    <div class="s-label">Su Serisi</div>
+    <h2 class="s-title">Suyun <em>Derinliği</em><br>Bileğinde</h2>
+    <p class="s-desc">Su Serisi, Türkiye'nin berrak denizlerinden ilham alan tonlarla tasarlandı. Her bakışta yeni bir dalga, yeni bir his.</p>
+    <a href="https://www.velucci.com.tr/kategori/su-serisi" class="btn-main" target="_blank">Seriyi Gör</a>
+  </div>
+  <div class="sc-watch">
+    <div class="sc-watch-wrap">
+      <div class="gring" style="width:300px;height:300px;"></div>
+      <div class="gring" style="width:380px;height:380px;animation-delay:1.5s;animation-duration:6s;"></div>
+      <!-- GERÇEK FOTOĞRAF: Aygök erkek saati (Su serisi) -->
+      <img id="sc1img" class="sc-img sc-img-shadow"
+        src="https://www.velucci.com.tr/uploads/product/697dcb32dcf7cIMG_2218.jpeg"
+        alt="Velucci Aygök">
     </div>
   </div>
 </section>
 
-<!-- ÜRÜNLER -->
-<section class="urunler" id="urunler">
-  <p class="section-label reveal">En Çok Tercih Edilenler</p>
-  <h2 class="section-title reveal reveal-delay-1">Öne Çıkan <em>Modeller</em></h2>
-  <div class="products-grid">
+<!-- SCENE 2: ÇiFT SAATLER — iki saat açılır -->
+<section class="scene sc-teal" id="scene2">
+  <div class="scene-bg-txt" style="top:-30px;right:-50px;">ÇiFT</div>
+  <div class="sc-watch" style="order:-1;">
+    <div class="sc-watch-wrap" style="width:380px;height:440px;">
+      <!-- Arka saat: Çift Set II -->
+      <img id="sc2back"
+        class="sc-img-back"
+        src="https://www.velucci.com.tr/uploads/product/697f59a38a022IMG_2323.jpeg"
+        alt="Velucci Çift 2"
+        style="top:30px;right:0;transform:rotate(9deg) scale(0.87);">
+      <!-- Ön saat: Çift Set I -->
+      <img id="sc2front"
+        class="sc-img sc-img-teal"
+        src="https://www.velucci.com.tr/uploads/product/697f60d1d0d2bIMG_2305.jpeg"
+        alt="Velucci Çift"
+        style="position:relative;z-index:3;transform:rotate(-5deg);">
+    </div>
+  </div>
+  <div class="sc-content rev" id="sc2c">
+    <div class="s-label">Çift Saatleri</div>
+    <h2 class="s-title">iki Kalp,<br><em>Bir Ritim</em></h2>
+    <p class="s-desc">Sevgilinizle uyumlu bir his. Çift saat setleri, birlikteliğin en zarif ifadesi. Kadın ve erkek modellerinden oluşan özel setler.</p>
+    <a href="https://www.velucci.com.tr/kategori/cift-saatleri" class="btn-main" target="_blank">Çift Setleri Gör</a>
+  </div>
+</section>
 
-    <div class="product-card reveal">
-      <div class="product-img-wrap">
-        <img src="https://www.velucci.com.tr/uploads/product/696e2d327a7aaIMG_1603.jpeg" alt="Nova" loading="lazy">
-        <span class="product-badge">3 Al 2 Öde</span>
+<!-- SCENE 3: ERKEK DARK — yükselir -->
+<section class="scene sc-dark" id="scene3">
+  <div class="scene-bg-txt" style="top:-20px;left:-20px;">NOVA</div>
+  <div class="sc-content rev" id="sc3c">
+    <div class="s-label">Nova & Kaya Serisi</div>
+    <h2 class="s-title">Erkeğin<br><em>Cesareti</em></h2>
+    <p class="s-desc">Nova ve Kaya serileri, güçlü hatları ve derin tonlarıyla modern erkeğin bileğine oturur. Gösterişsiz, ama güçlü.</p>
+    <a href="https://www.velucci.com.tr/kategori/erkek-saatleri" class="btn-white" target="_blank" style="display:inline-block;">Erkek Modellerini Gör</a>
+  </div>
+  <div class="sc-watch">
+    <div class="sc-watch-wrap">
+      <!-- Floating particles -->
+      <div id="fp3" style="position:absolute;inset:0;pointer-events:none;"></div>
+      <!-- GERÇEK FOTOĞRAF: Nova erkek saati -->
+      <img id="sc3img"
+        class="sc-img sc-img-dark"
+        src="https://www.velucci.com.tr/uploads/product/696e2d327a7aaIMG_1603.jpeg"
+        alt="Velucci Nova"
+        style="animation:gentleFloat 4s ease-in-out infinite;">
+    </div>
+  </div>
+</section>
+@keyframes gentleFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+
+<!-- SCENE 4: KADIN — dönerek girer -->
+<section class="scene sc-cream" id="scene4">
+  <div class="scene-bg-txt" style="bottom:-30px;right:-40px;font-size:200px;">🌿</div>
+  <div class="sc-watch">
+    <div class="sc-watch-wrap" style="width:340px;height:440px;">
+      <div class="gring" style="width:290px;height:290px;border-color:rgba(45,158,143,0.1);"></div>
+      <!-- GERÇEK FOTOĞRAF: Çark 2 kadın saati -->
+      <img id="sc4img"
+        class="sc-img sc-img-shadow"
+        src="https://www.velucci.com.tr/uploads/product/6972821138709IMG_1738.jpeg"
+        alt="Velucci Çark 2">
+    </div>
+  </div>
+  <div class="sc-content rev" id="sc4c">
+    <div class="s-label">Kadın Saatleri</div>
+    <h2 class="s-title">Zarifliğin<br><em>Simgesi</em></h2>
+    <p class="s-desc">Çark, Soft ve Iconic serileri, kadının güçlü ve zarif duruşunu yansıtır. Her detay, her çizgi bir sanat.</p>
+    <a href="https://www.velucci.com.tr/kategori/kadin-saatleri" class="btn-main" target="_blank">Kadın Modellerini Gör</a>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="koleksiyon">
+  <p class="sec-label rev">En Çok Tercih Edilenler</p>
+  <h2 class="sec-title rev d1">Öne Çıkan <em>Modeller</em></h2>
+  <div class="pgrid">
+
+    <div class="pcard rev">
+      <div class="pimg">
+        <img src="https://www.velucci.com.tr/uploads/product/696e142e2c7f7IMG_1573.jpeg" alt="Mete" loading="lazy">
+        <span class="pbadge">Erkek</span>
       </div>
-      <div class="product-info">
-        <div class="product-cat">Erkek Saatleri</div>
-        <div class="product-name">NOVA</div>
-        <div class="product-footer">
-          <div class="product-price">950 ₺</div>
-          <a href="https://www.velucci.com.tr/urun/nova-velucci-erkek-saati" class="product-btn" target="_blank">İncele →</a>
+      <div class="pinfo">
+        <div class="pcat">Erkek Saatleri</div>
+        <div class="pname">METE</div>
+        <div class="pfooter">
+          <div class="pprice">950 ₺</div>
+          <a href="https://www.velucci.com.tr/urun/mete-velucci-erkek-saati" class="plink" target="_blank">incele →</a>
         </div>
       </div>
     </div>
 
-    <div class="product-card reveal reveal-delay-1">
-      <div class="product-img-wrap">
-        <img src="https://www.velucci.com.tr/uploads/product/697e89c467a8aIMG_2247.jpeg" alt="Kaya" loading="lazy">
-        <span class="product-badge">3 Al 2 Öde</span>
+    <div class="pcard rev d1">
+      <div class="pimg">
+        <img src="https://www.velucci.com.tr/uploads/product/696e18fd97591IMG_1581.jpeg" alt="Barçın" loading="lazy">
+        <span class="pbadge">Erkek</span>
       </div>
-      <div class="product-info">
-        <div class="product-cat">Erkek Saatleri</div>
-        <div class="product-name">KAYA</div>
-        <div class="product-footer">
-          <div class="product-price">950 ₺</div>
-          <a href="https://www.velucci.com.tr/urun/kaya-velucci-erkek-saati" class="product-btn" target="_blank">İncele →</a>
+      <div class="pinfo">
+        <div class="pcat">Erkek Saatleri</div>
+        <div class="pname">BARÇIN</div>
+        <div class="pfooter">
+          <div class="pprice">950 ₺</div>
+          <a href="https://www.velucci.com.tr/urun/barcin-velucci-erkek-saati" class="plink" target="_blank">incele →</a>
         </div>
       </div>
     </div>
 
-    <div class="product-card reveal reveal-delay-2">
-      <div class="product-img-wrap">
-        <img src="https://www.velucci.com.tr/uploads/product/69acb1138a824IMG_3044.jpeg" alt="Toprak" loading="lazy">
-        <span class="product-badge">3 Al 2 Öde</span>
+    <div class="pcard rev d2">
+      <div class="pimg">
+        <img src="https://www.velucci.com.tr/uploads/product/696e194a65889IMG_1585.jpeg" alt="Titan" loading="lazy">
+        <span class="pbadge">Erkek</span>
       </div>
-      <div class="product-info">
-        <div class="product-cat">Unisex</div>
-        <div class="product-name">TOPRAK</div>
-        <div class="product-footer">
-          <div class="product-price">950 ₺</div>
-          <a href="https://www.velucci.com.tr/urun/toprak-velucci-unisex-saat" class="product-btn" target="_blank">İncele →</a>
+      <div class="pinfo">
+        <div class="pcat">Erkek Saatleri</div>
+        <div class="pname">TiTAN</div>
+        <div class="pfooter">
+          <div class="pprice">950 ₺</div>
+          <a href="https://www.velucci.com.tr/urun/titan-velucci-erkek-saati" class="plink" target="_blank">incele →</a>
         </div>
       </div>
     </div>
 
-    <div class="product-card reveal reveal-delay-3">
-      <div class="product-img-wrap">
+    <div class="pcard rev d3">
+      <div class="pimg">
+        <img src="https://www.velucci.com.tr/uploads/product/696e1922bb165IMG_1583.jpeg" alt="Ali" loading="lazy">
+        <span class="pbadge">Erkek</span>
+      </div>
+      <div class="pinfo">
+        <div class="pcat">Erkek Saatleri</div>
+        <div class="pname">ALi</div>
+        <div class="pfooter">
+          <div class="pprice">950 ₺</div>
+          <a href="https://www.velucci.com.tr/urun/ali-velucci-erkek-saati" class="plink" target="_blank">incele →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard rev">
+      <div class="pimg">
         <img src="https://www.velucci.com.tr/uploads/product/69acb26e9a9c6IMG_3052.jpeg" alt="Su Yeşili" loading="lazy">
-        <span class="product-badge">3 Al 2 Öde</span>
+        <span class="pbadge" style="background:#2d9e8f;">Su Serisi</span>
       </div>
-      <div class="product-info">
-        <div class="product-cat">Unisex</div>
-        <div class="product-name">SU YEŞİLİ</div>
-        <div class="product-footer">
-          <div class="product-price">950 ₺</div>
-          <a href="https://www.velucci.com.tr/urun/su-yesili-velucci-unisex-saat" class="product-btn" target="_blank">İncele →</a>
+      <div class="pinfo">
+        <div class="pcat">Su Serisi</div>
+        <div class="pname">SU YEŞiLi</div>
+        <div class="pfooter">
+          <div class="pprice">950 ₺</div>
+          <a href="https://www.velucci.com.tr/urun/su-yesili-velucci-unisex-saat" class="plink" target="_blank">incele →</a>
         </div>
       </div>
     </div>
 
-    <div class="product-card reveal">
-      <div class="product-img-wrap">
+    <div class="pcard rev d1">
+      <div class="pimg">
+        <img src="https://www.velucci.com.tr/uploads/product/69acb1138a824IMG_3044.jpeg" alt="Toprak" loading="lazy">
+        <span class="pbadge" style="background:#8b6340;">Unisex</span>
+      </div>
+      <div class="pinfo">
+        <div class="pcat">Unisex</div>
+        <div class="pname">TOPRAK</div>
+        <div class="pfooter">
+          <div class="pprice">950 ₺</div>
+          <a href="https://www.velucci.com.tr/urun/toprak-velucci-unisex-saat" class="plink" target="_blank">incele →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pcard rev d2">
+      <div class="pimg">
         <img src="https://www.velucci.com.tr/uploads/product/697f60d1d0d2bIMG_2305.jpeg" alt="Çift" loading="lazy">
-        <span class="product-badge">Çift Modeli</span>
+        <span class="pbadge" style="background:#b05070;">Çift</span>
       </div>
-      <div class="product-info">
-        <div class="product-cat">Çift Saatleri</div>
-        <div class="product-name">ÇİFT SET</div>
-        <div class="product-footer">
-          <div class="product-price">950 ₺</div>
-          <a href="https://www.velucci.com.tr/urun/2-li-cift-saatleri" class="product-btn" target="_blank">İncele →</a>
+      <div class="pinfo">
+        <div class="pcat">Çift Saatleri</div>
+        <div class="pname">ÇiFT SET</div>
+        <div class="pfooter">
+          <div class="pprice">950 ₺</div>
+          <a href="https://www.velucci.com.tr/urun/2-li-cift-saatleri" class="plink" target="_blank">incele →</a>
         </div>
       </div>
     </div>
 
-    <div class="product-card reveal reveal-delay-1">
-      <div class="product-img-wrap">
-        <img src="https://www.velucci.com.tr/uploads/product/6972821138709IMG_1738.jpeg" alt="Çark 2" loading="lazy">
-        <span class="product-badge">3 Al 2 Öde</span>
+    <div class="pcard rev d3">
+      <div class="pimg">
+        <img src="https://www.velucci.com.tr/uploads/product/696e196020a30IMG_1587.jpeg" alt="Ayhan" loading="lazy">
+        <span class="pbadge">Erkek</span>
       </div>
-      <div class="product-info">
-        <div class="product-cat">Kadın Saatleri</div>
-        <div class="product-name">ÇARK 2</div>
-        <div class="product-footer">
-          <div class="product-price">950 ₺</div>
-          <a href="https://www.velucci.com.tr/urun/cark-2-velucci-kadin-saati" class="product-btn" target="_blank">İncele →</a>
+      <div class="pinfo">
+        <div class="pcat">Erkek Saatleri</div>
+        <div class="pname">AYHAN</div>
+        <div class="pfooter">
+          <div class="pprice">950 ₺</div>
+          <a href="https://www.velucci.com.tr/urun/ayhan-velucci-erkek-saati" class="plink" target="_blank">incele →</a>
         </div>
       </div>
     </div>
 
-    <div class="product-card reveal reveal-delay-2">
-      <div class="product-img-wrap">
-        <img src="https://www.velucci.com.tr/uploads/product/697f59a38a022IMG_2323.jpeg" alt="Çift 2" loading="lazy">
-        <span class="product-badge">Çift Modeli</span>
-      </div>
-      <div class="product-info">
-        <div class="product-cat">Çift Saatleri</div>
-        <div class="product-name">ÇİFT SET II</div>
-        <div class="product-footer">
-          <div class="product-price">950 ₺</div>
-          <a href="https://www.velucci.com.tr/urun/cift-saatleri" class="product-btn" target="_blank">İncele →</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Tümünü Gör kartı -->
-    <div class="product-card reveal reveal-delay-3" style="display:flex;align-items:center;justify-content:center;background:var(--charcoal);min-height:400px;">
-      <div style="text-align:center;padding:40px;">
-        <div style="font-family:'Cormorant Garamond',serif;font-size:48px;color:rgba(201,168,76,0.2);margin-bottom:24px;">+</div>
-        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--cream);margin-bottom:12px;">Daha Fazlası</div>
-        <div style="font-size:9px;letter-spacing:0.3em;color:var(--silver);margin-bottom:28px;">10+ farklı seri</div>
-        <a href="https://www.velucci.com.tr" class="btn-primary" target="_blank" style="display:inline-block;">Tümünü Gör</a>
-      </div>
-    </div>
-
+  </div>
+  <div style="text-align:center;margin-top:56px;" class="rev">
+    <a href="https://www.velucci.com.tr" class="btn-main" target="_blank">Tüm Koleksiyonu Gör →</a>
   </div>
 </section>
 
 <!-- KAMPANYA -->
 <section class="kampanya" id="kampanya">
-  <p class="kampanya-label reveal">Özel Fırsat</p>
-  <h2 class="kampanya-title reveal reveal-delay-1">
-    3 Al <em>2 Öde</em>
-  </h2>
-  <p class="kampanya-sub reveal reveal-delay-2">Tüm koleksiyonda geçerli. Sevdiklerinize hediye edin,<br>kendinizi ödüllendirin — üçüncüsü sizden.</p>
-  <div class="kampanya-price reveal reveal-delay-3">
-    <div>
-      <div class="kp-label">Fiyat</div>
-      <div class="kp-val">950 ₺</div>
+  <div style="position:relative;z-index:2;">
+    <p class="k-label rev">Sınırlı Süre</p>
+    <h2 class="k-title rev d1">3 Al<br><em>2 Öde</em></h2>
+    <p class="k-sub rev d2">Tüm koleksiyonda geçerli. Kendin için al, sevgiliye hediye et,<br>arkadaşınla paylaş — üçüncüsü bizden.</p>
+    <div class="k-box rev d3">
+      <div class="k-item"><div class="k-num">950₺</div><div class="k-lbl">Birim Fiyat</div></div>
+      <div class="k-item"><div class="k-num">×3</div><div class="k-lbl">Adet Al</div></div>
+      <div class="k-item"><div class="k-num">1.900₺</div><div class="k-lbl">Toplam Öde</div></div>
+      <div class="k-item"><div class="k-num">950₺</div><div class="k-lbl">Kazanç 🎁</div></div>
     </div>
-    <div class="kp-divider"></div>
-    <div>
-      <div class="kp-label">3'lü Alımda</div>
-      <div class="kp-val">1.900 ₺</div>
-    </div>
-    <div class="kp-divider"></div>
-    <div>
-      <div class="kp-label">Kazanç</div>
-      <div class="kp-val" style="color:#6dbf6d;">950 ₺</div>
-    </div>
+    <a href="https://www.velucci.com.tr" class="btn-white rev d4" target="_blank">Kampanyadan Yararlan</a>
   </div>
-  <a href="https://www.velucci.com.tr" class="btn-primary reveal" target="_blank" style="display:inline-block;">Hemen Alışveriş Yap</a>
 </section>
 
-<!-- ABOUT / MARKA -->
-<section style="padding:140px 60px;background:var(--charcoal);">
-  <div class="about" style="padding:0;max-width:1200px;margin:0 auto;">
-    <div class="about-left">
-      <p class="section-label reveal" style="text-align:left;margin-bottom:12px;">Biz Kimiz</p>
-      <h2 class="about-big reveal reveal-delay-1">Türk <em>ruhunu</em><br>bileğine taşı</h2>
-      <p class="about-text reveal reveal-delay-2">Velucci, yerli tasarım anlayışıyla şekillenen, her detayı özenle düşünülmüş bir saat markasıdır. Kadın, erkek ve çift modellerimizle her tarza hitap ediyoruz.</p>
-      <p class="about-text reveal reveal-delay-3">Mono, Su, Form, Mega, Iconic ve daha birçok serimizle bileğinize en uygun modeli bulacaksınız. Tüm saatlerimiz uygun fiyatıyla kaliteden ödün vermiyor.</p>
-      <div style="margin-top:36px;" class="reveal reveal-delay-4">
-        <a href="https://www.instagram.com/veluccisaat/" class="btn-secondary" target="_blank" style="display:inline-flex;align-items:center;gap:12px;">
-          <span>Instagram'da Takip Et</span>
-          <span style="color:var(--gold);">@veluccisaat</span>
-        </a>
-      </div>
+<!-- HAKKIMIZDA -->
+<section class="scene sc-cream" id="hakkimizda" style="min-height:70vh;">
+  <div class="sc-content rev">
+    <div class="s-label">Velucci Hakkında</div>
+    <h2 class="s-title">Türkiye'nin<br><em>Saat Markası</em></h2>
+    <p class="s-desc">Velucci, yerli tasarım anlayışı ve uygun fiyatıyla herkesin bileğine layık bir saat takmayı hedefler. Kadın, erkek ve çift modellerimizle 10'dan fazla farklı seri sunuyoruz.</p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;">
+      <a href="https://www.velucci.com.tr" class="btn-main" target="_blank">Mağazayı Ziyaret Et</a>
+      <a href="https://www.instagram.com/veluccisaat/" class="btn-out" target="_blank">@veluccisaat →</a>
     </div>
-    <div class="about-right reveal reveal-delay-2">
-      <div class="about-img-box">
-        <img src="https://www.velucci.com.tr/uploads/erkek.png" alt="Erkek Saatleri" onerror="this.style.display='none'">
-      </div>
-      <div class="about-img-box">
-        <img src="https://www.velucci.com.tr/uploads/kadin.png" alt="Kadın Saatleri" onerror="this.style.display='none'">
-      </div>
-      <div class="about-img-box" style="background:linear-gradient(135deg,#1a1208,#050505);display:flex;align-items:center;justify-content:center;">
-        <div style="text-align:center;padding:24px;">
-          <div style="font-family:'Cormorant Garamond',serif;font-size:48px;color:rgba(201,168,76,0.4);">10+</div>
-          <div style="font-size:8px;letter-spacing:0.4em;color:var(--silver);text-transform:uppercase;">Farklı Seri</div>
-        </div>
-      </div>
+  </div>
+  <div class="sc-watch">
+    <div class="sc-watch-wrap" style="width:360px;height:440px;">
+      <!-- Arka: Kaya -->
+      <img class="sc-img-back"
+        src="https://www.velucci.com.tr/uploads/product/697e89c467a8aIMG_2247.jpeg"
+        alt="Kaya"
+        style="top:40px;right:10px;transform:rotate(10deg) scale(0.82);opacity:0.6;">
+      <!-- Ön: Nova -->
+      <img id="sc5img"
+        class="sc-img sc-img-shadow"
+        src="https://www.velucci.com.tr/uploads/product/696e2d327a7aaIMG_1603.jpeg"
+        alt="Nova"
+        style="transform:rotate(-4deg);">
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer id="iletisim">
-  <div class="footer-top">
+<footer>
+  <div class="fg">
     <div>
-      <div class="footer-logo">
-        <img src="https://www.velucci.com.tr/uploads/logo.png" alt="Velucci" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=\'font-family:Cormorant Garamond,serif;font-size:28px;color:#e2c97e;letter-spacing:0.3em;\'>VELUCCİ</span>'">
-      </div>
-      <div class="footer-tagline">Türk Saat Markası · velucci.com.tr</div>
+      <div class="fb">VELU<span>CC</span>i</div>
+      <p class="ft">Türkiye'nin saat markası. Uygun fiyat, özgün tasarım, her bileğe uygun model.</p>
     </div>
-    <div class="footer-links">
-      <div class="footer-col">
-        <h4>Seriler</h4>
-        <ul>
-          <li>Su Serisi</li>
-          <li>Mono Serisi</li>
-          <li>Form Serisi</li>
-          <li>Mega Serisi</li>
-          <li>Iconic Serisi</li>
-          <li>Soft Serisi</li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Kategoriler</h4>
-        <ul>
-          <li>Kadın Saatleri</li>
-          <li>Erkek Saatleri</li>
-          <li>Çift Saatleri</li>
-          <li>Unisex Modeller</li>
-          <li>Eşref Tek Serisi</li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>İletişim</h4>
-        <ul>
-          <li>velucci.com.tr</li>
-          <li>@veluccisaat</li>
-          <li>Sipariş Takibi</li>
-          <li>3 Al 2 Öde</li>
-        </ul>
-      </div>
+    <div>
+      <div class="fh">Seriler</div>
+      <ul class="fl">
+        <li><a href="https://www.velucci.com.tr/kategori/su-serisi" target="_blank">Su Serisi</a></li>
+        <li><a href="https://www.velucci.com.tr/kategori/mono-serisi" target="_blank">Mono Serisi</a></li>
+        <li><a href="https://www.velucci.com.tr/kategori/form-serisi" target="_blank">Form Serisi</a></li>
+        <li><a href="https://www.velucci.com.tr/kategori/mega-serisi" target="_blank">Mega Serisi</a></li>
+        <li><a href="https://www.velucci.com.tr/kategori/iconic-serisi" target="_blank">iconic Serisi</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fh">Kategoriler</div>
+      <ul class="fl">
+        <li><a href="https://www.velucci.com.tr/kategori/kadin-saatleri" target="_blank">Kadın Saatleri</a></li>
+        <li><a href="https://www.velucci.com.tr/kategori/erkek-saatleri" target="_blank">Erkek Saatleri</a></li>
+        <li><a href="https://www.velucci.com.tr/kategori/cift-saatleri" target="_blank">Çift Saatleri</a></li>
+        <li><a href="https://www.velucci.com.tr/kategori/esref-tek-serisi" target="_blank">Eşref Tek Serisi</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fh">iletişim</div>
+      <ul class="fl">
+        <li><a href="https://www.velucci.com.tr" target="_blank">velucci.com.tr</a></li>
+        <li><a href="https://www.instagram.com/veluccisaat/" target="_blank">@veluccisaat</a></li>
+        <li><a href="https://www.velucci.com.tr/iletisim" target="_blank">iletişim Formu</a></li>
+      </ul>
     </div>
   </div>
-  <div class="footer-bottom">
+  <div class="fbot">
     <p>© 2025 Velucci. Tüm hakları saklıdır.</p>
-    <div class="footer-social">
-      <a href="https://www.instagram.com/veluccisaat/" target="_blank">Instagram</a>
-      <a href="https://www.velucci.com.tr" target="_blank">Mağaza</a>
-    </div>
+    <a href="https://www.instagram.com/veluccisaat/" class="insta" target="_blank">instagram → @veluccisaat</a>
   </div>
 </footer>
 
+<style>
+@keyframes gentleFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+</style>
+
 <script>
-// Cursor
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
+// CURSOR
+const cur=document.getElementById('cur'), ring=document.getElementById('curRing');
 let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{
-  mx=e.clientX;my=e.clientY;
-  cursor.style.left=mx-4+'px';cursor.style.top=my-4+'px';
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function a(){rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a);})();
+
+// NAV
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>50));
+
+// PARTICLES
+const pc=document.getElementById('ptcl');
+for(let i=0;i<16;i++){
+  const p=document.createElement('div');
+  const s=Math.random()*50+15;
+  p.className='particle';
+  p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;animation-duration:${Math.random()*14+9}s;animation-delay:${Math.random()*10}s;`;
+  pc.appendChild(p);
+}
+
+// REVEAL
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on');}),{threshold:0.12,rootMargin:'0px 0px -50px 0px'});
+document.querySelectorAll('.rev').forEach(el=>obs.observe(el));
+
+// SCENE 3 particles
+const fp3=document.getElementById('fp3');
+for(let i=0;i<10;i++){
+  const d=document.createElement('div');
+  const s=Math.random()*8+3;
+  d.style.cssText=`position:absolute;width:${s}px;height:${s}px;border-radius:50%;background:${Math.random()>0.5?'#2d9e8f':'#c9a84c'};opacity:${Math.random()*0.35+0.1};left:${Math.random()*100}%;top:${Math.random()*100}%;animation:tagF ${Math.random()*4+3}s ease-in-out ${Math.random()*2}s infinite;`;
+  fp3.appendChild(d);
+}
+
+// SCROLL-DRIVEN ANIMATIONS
+let lastY=0;
+window.addEventListener('scroll',()=>{
+  const sy=window.scrollY;
+
+  // Scene 1: saat yavaşça döner ve büyür
+  const sc1=document.getElementById('scene1');
+  if(sc1){
+    const r=sc1.getBoundingClientRect();
+    if(r.top<window.innerHeight&&r.bottom>0){
+      const p=Math.max(0,Math.min(1,(window.innerHeight-r.top)/(window.innerHeight+r.height)));
+      const img=document.getElementById('sc1img');
+      if(img) img.style.transform=`rotate(${(p-0.5)*40}deg) scale(${0.85+p*0.25}) translateY(${(0.5-p)*30}px)`;
+    }
+  }
+
+  // Scene 2: iki saat birbirinden açılır
+  const sc2=document.getElementById('scene2');
+  if(sc2){
+    const r=sc2.getBoundingClientRect();
+    if(r.top<window.innerHeight&&r.bottom>0){
+      const p=Math.max(0,Math.min(1,(window.innerHeight-r.top)/(window.innerHeight+r.height)));
+      const f=document.getElementById('sc2front');
+      const b=document.getElementById('sc2back');
+      if(f) f.style.transform=`rotate(${-5-p*12}deg) translateX(${-p*30}px)`;
+      if(b) b.style.transform=`rotate(${9+p*10}deg) scale(0.87) translateX(${p*28}px)`;
+    }
+  }
+
+  // Scene 3: saat aşağıdan yükselir + ışıldama
+  const sc3=document.getElementById('scene3');
+  if(sc3){
+    const r=sc3.getBoundingClientRect();
+    if(r.top<window.innerHeight&&r.bottom>0){
+      const p=Math.max(0,Math.min(1,(window.innerHeight-r.top)/(window.innerHeight+r.height)));
+      const img=document.getElementById('sc3img');
+      if(img){
+        img.style.transform=`translateY(${60-p*80}px) scale(${0.8+p*0.25})`;
+        img.style.filter=`drop-shadow(0 0 ${20+p*40}px rgba(45,158,143,${0.2+p*0.4})) drop-shadow(0 20px 60px rgba(0,0,0,0.6))`;
+      }
+    }
+  }
+
+  // Scene 4: saat dönerek gelir
+  const sc4=document.getElementById('scene4');
+  if(sc4){
+    const r=sc4.getBoundingClientRect();
+    if(r.top<window.innerHeight&&r.bottom>0){
+      const p=Math.max(0,Math.min(1,(window.innerHeight-r.top)/(window.innerHeight+r.height)));
+      const img=document.getElementById('sc4img');
+      if(img) img.style.transform=`rotate(${(1-p)*-45}deg) scale(${0.7+p*0.35}) translateX(${(1-p)*40}px)`;
+    }
+  }
+
+  // Hakkımızda: zoom out
+  const hk=document.getElementById('hakkimizda');
+  if(hk){
+    const r=hk.getBoundingClientRect();
+    if(r.top<window.innerHeight&&r.bottom>0){
+      const p=Math.max(0,Math.min(1,(window.innerHeight-r.top)/(window.innerHeight+r.height)));
+      const img=document.getElementById('sc5img');
+      if(img) img.style.transform=`rotate(${-4+p*6}deg) scale(${1.15-p*0.2})`;
+    }
+  }
+
+  lastY=sy;
 });
-(function animRing(){rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;ring.style.left=rx-17+'px';ring.style.top=ry-17+'px';requestAnimationFrame(animRing);})();
-
-// Hero bg
-setTimeout(()=>document.getElementById('heroBg').classList.add('loaded'),100);
-
-// Ticks
-const face=document.getElementById('heroWatch');
-for(let i=0;i<60;i++){
-  const isH=i%5===0;
-  const ang=i*6;
-  const rad=(ang-90)*Math.PI/180;
-  const r=132;
-  const x=Math.cos(rad)*r,y=Math.sin(rad)*r;
-  const t=document.createElement('div');
-  const inner=document.createElement('div');
-  t.style.cssText=`position:absolute;top:50%;left:50%;transform:translate(${x}px,${y}px) rotate(${ang}deg);`;
-  inner.style.cssText=`width:${isH?2:1}px;height:${isH?10:4}px;background:${isH?'rgba(201,168,76,0.8)':'rgba(201,168,76,0.25)'};transform:translateX(-50%) translateY(-50%);`;
-  t.appendChild(inner);face.appendChild(t);
-}
-
-// Clock
-function updateClock(){
-  const now=new Date();
-  const s=now.getSeconds()+now.getMilliseconds()/1000;
-  const m=now.getMinutes()+s/60;
-  const h=(now.getHours()%12)+m/60;
-  document.getElementById('hourHand').style.transform=`rotate(${h*30}deg)`;
-  document.getElementById('minuteHand').style.transform=`rotate(${m*6}deg)`;
-  document.getElementById('secondHand').style.transform=`rotate(${s*6}deg)`;
-}
-setInterval(updateClock,50);updateClock();
-
-// Reveal
-const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.12,rootMargin:'0px 0px -50px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
